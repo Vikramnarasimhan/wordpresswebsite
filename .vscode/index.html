@@ -16,7 +16,7 @@
       <input id="docAuthor" type="text" placeholder="Author Name">
     </div>
 
-    <!-- Toolbar -->
+    
     <div class="toolbar">
       <button data-cmd="bold">B</button>
       <button data-cmd="italic">I</button>
@@ -30,9 +30,15 @@
       <button id="exportDoc">Export .doc</button>
       <button id="exportPDF">Export PDF</button>
       <button id="undoing">Undo</button>
+      <select id="fontSelect">
+      <option value="">Default Font</option>
+      <option value="Tahoma">Tahoma</option>
+      <option value="Georgia">Georgia</option>
+      <option value="Courier New">Courier New</option>
+    </select>
     </div>
+    
 
-    <!-- Editable area -->
     <div id="editor" class="editor" contenteditable="true">
       <h1>Start typing…</h1>
       <p>Format text, insert links/images/tables. Preview and export to DOC/PDF.</p>

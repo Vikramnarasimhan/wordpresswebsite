@@ -114,6 +114,15 @@ document.getElementById("exportPDF").onclick = ()=>{
 document.getElementById("undoing").onclick = () => 
   editor.cmd("undo");
 const editorRoot = document.getElementById("editor");
+document.getElementById("fontSelect").onchange = (e) => {
+  const font = e.target.value;
+  if (font) {
+    editor.root.focus();
+    editor.cmd("fontName", font);
+    e.target.selectedIndex = 0; // Reset dropdown to "Font"
+  }
+};
+
 
 let draggedElement = null;
 
