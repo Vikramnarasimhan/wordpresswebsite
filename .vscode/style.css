@@ -93,5 +93,6 @@ body {
 td {
   resize: both;
   overflow: auto;
-  color: blue;
+  background-color: white;
+  border: black;
 }

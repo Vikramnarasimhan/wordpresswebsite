@@ -52,10 +52,10 @@ class Editor {
 }
 
   insertTable(rows = 2, cols = 2) {
-    let html = ` <table style="border-collapse: collapse; width: 100%; border: 1px solid #ccc;">`;
+    let html = ` <table style="border-collapse: collapse;  width: 100%; border: 1px solid #1a0d0dff;">`;
     for (let r = 0; r < rows; r++) {
       html += "<tr>";
-      for (let c = 0; c < cols; c++) html += `<td style="border: 1px solid #ccc; padding: 12px; min-width: 100px;">&nbsp;</td>`;
+      for (let c = 0; c < cols; c++) html += `<td style="border: 1px solid #110e0eff; padding: 12px; min-width: 100px;">&nbsp;</td>`;
       html += "</tr>";
     }
     html += "</table>";
