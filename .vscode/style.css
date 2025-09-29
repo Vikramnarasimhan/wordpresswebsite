@@ -1,0 +1,54 @@
+body {
+  font-family: Arial, sans-serif;
+  background: rgb(5, 5, 77);
+  margin: 0;
+  padding: 20px;
+  color: black;
+}
+.wrap {
+  max-width: 900px;
+  margin: auto;
+}
+.app-title {
+  margin-bottom: 10px;
+  color: white;
+}
+.meta-row input {
+  margin: 5px;
+  padding: 8px;
+}
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 12px 0;
+}
+.toolbar button {
+  padding: 6px 10px;
+  cursor: pointer;
+}
+.editor {
+  border: 1px solid #ccc;
+  background: #fff;
+  min-height: 300px;
+  padding: 10px;
+}
+.modal-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none; place-items: center;
+}
+.modal {
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  width: 80%; max-width: 700px;
+}
+.modal header {
+  display: flex; justify-content: space-between;
+  align-items: center; margin-bottom: 10px;
+}
+.preview-area {
+  max-height: 60vh;
+  overflow-y: auto;
+}

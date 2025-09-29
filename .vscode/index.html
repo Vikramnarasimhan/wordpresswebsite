@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordPad Editor – WP Exporter</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <h2 class="app-title">WordPress Content Exporter – WordPad Editor</h2>
+
+    <!-- Metadata -->
+    <div class="meta-row">
+      <input id="docTitle" type="text" placeholder="Document Title">
+      <input id="docAuthor" type="text" placeholder="Author Name">
+    </div>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+      <button data-cmd="bold">B</button>
+      <button data-cmd="italic">I</button>
+      <button data-cmd="underline">U</button>
+      <button id="linkBtn">Link</button>
+      <button id="imgUrlBtn">Image</button>
+      <button id="tableBtn">Table</button>
+      <button id="clearFmt">Clear</button>
+      <button id="resetDoc">Reset</button>
+      <button id="previewBtn">Preview</button>
+      <button id="exportDoc">Export .doc</button>
+      <button id="exportPDF">Export PDF</button>
+    </div>
+
+    <!-- Editable area -->
+    <div id="editor" class="editor" contenteditable="true">
+      <h1>Start typing…</h1>
+      <p>Format text, insert links/images/tables. Preview and export to DOC/PDF.</p>
+    </div>
+  </div>
+
+  <!-- Preview Modal -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal">
+      <header>
+        <h3>Preview</h3>
+        <button id="closePreview">✕</button>
+      </header>
+      <div class="preview-area" id="previewArea"></div>
+    </div>
+  </div>
+
+  <!-- html2pdf dependency -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
