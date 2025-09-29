@@ -12,10 +12,10 @@ class Editor {
     this.cmd("insertImage", url);
   }
   insertTable(rows = 2, cols = 2) {
-    let html = "<table border='1'>";
+    let html = ` <table style="border-collapse: collapse; width: 100%; border: 1px solid #ccc;">`;
     for (let r = 0; r < rows; r++) {
       html += "<tr>";
-      for (let c = 0; c < cols; c++) html += "<td>&nbsp;</td>";
+      for (let c = 0; c < cols; c++) html += `<td style="border: 1px solid #ccc; padding: 12px; min-width: 100px;">&nbsp;</td>`;
       html += "</tr>";
     }
     html += "</table>";
