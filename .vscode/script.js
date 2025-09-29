@@ -1,6 +1,40 @@
 
 class Editor {
-  constructor(root) { this.root = root; }
+  constructor(root) { this.root = root;
+        this.autosaveKey = "documentContent";
+        this.statusElement = document.getElementById("save-status");
+
+        this.load();       
+        this.setupAutosave();
+
+
+
+   }
+  updateSaveStatus(text) {
+    if (this.statusElement) {
+      this.statusElement.textContent = `Status: ${text}`;
+    }
+  }
+
+  setupAutosave() {
+    this.root.addEventListener("input", () => {
+      localStorage.setItem(this.autosaveKey, this.root.innerHTML);
+      this.updateSaveStatus("Saved");
+    });
+  }
+
+  load() {
+    const saved = localStorage.getItem(this.autosaveKey);
+    if (saved) {
+      this.root.innerHTML = saved;
+      this.root.querySelectorAll(".editor").forEach(p => p.contentEditable = "true");
+      this.updateSaveStatus("Saving...");
+    } else {
+      this.updateSaveStatus("Not Saved (New Document)");
+    }
+  }
+
+
   cmd(command, value = null) {
     document.execCommand(command, false, value);
     this.root.focus();
