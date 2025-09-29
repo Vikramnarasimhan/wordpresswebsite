@@ -90,3 +90,8 @@ body {
   max-height: 60vh;
   overflow-y: auto;
 }
+td {
+  resize: both;
+  overflow: auto;
+  color: blue;
+}

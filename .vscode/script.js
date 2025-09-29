@@ -34,7 +34,6 @@ class Editor {
     }
   }
 
-
   cmd(command, value = null) {
     document.execCommand(command, false, value);
     this.root.focus();
