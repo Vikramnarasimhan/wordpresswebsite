@@ -12,6 +12,7 @@ body {
 .app-title {
   margin-bottom: 10px;
   color: white;
+
 }
 .meta-row input {
   margin: 5px;
@@ -38,7 +39,7 @@ body {
 .editor {
   border: 1px solid #ccc;
   background: #fff;
-  min-height: 300px;
+  min-height: 800px;
   padding: 10px;
 }
 .modal-backdrop {
