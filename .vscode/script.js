@@ -1,16 +1,23 @@
-// Editor core
+
 class Editor {
   constructor(root) { this.root = root; }
   cmd(command, value = null) {
     document.execCommand(command, false, value);
+    this.root.focus();
   }
   insertLink(url) {
     if (!/^https?:\/\//i.test(url)) url = "https://" + url;
     this.cmd("createLink", url);
   }
   insertImage(url) {
-    this.cmd("insertImage", url);
-  }
+  const wrapperHTML = `
+    <div contenteditable="false" class="img-wrapper" draggable="true">
+      <img src="${url}" />
+    </div>
+  `;
+  this.cmd("insertHTML", wrapperHTML);
+}
+
   insertTable(rows = 2, cols = 2) {
     let html = ` <table style="border-collapse: collapse; width: 100%; border: 1px solid #ccc;">`;
     for (let r = 0; r < rows; r++) {
@@ -29,7 +36,7 @@ class Editor {
   get html() { return this.root.innerHTML; }
 }
 
-// Modal
+
 class Modal {
   constructor(backdrop, content) {
     this.backdrop = backdrop;
@@ -41,7 +48,7 @@ class Modal {
   hide() { this.backdrop.style.display="none"; }
 }
 
-// Exporter
+
 class Exporter {
   constructor(editor) { this.editor = editor; }
   exportDoc(title, author) {
@@ -59,12 +66,12 @@ class Exporter {
   }
 }
 
-// Init
+
 const editor = new Editor(document.getElementById("editor"));
 const modal = new Modal(document.getElementById("modalBackdrop"), document.getElementById("previewArea"));
 const exporter = new Exporter(editor);
 
-// Toolbar bindings
+
 document.querySelectorAll("[data-cmd]").forEach(btn=>{
   btn.onclick = ()=>editor.cmd(btn.dataset.cmd);
 });
@@ -104,3 +111,47 @@ document.getElementById("exportPDF").onclick = ()=>{
   let author = document.getElementById("docAuthor").value;
   exporter.exportPDF(title, author);
 };
+document.getElementById("undoing").onclick = () => 
+  editor.cmd("undo");
+const editorRoot = document.getElementById("editor");
+
+let draggedElement = null;
+
+editorRoot.addEventListener("dragstart", (e) => {
+  if (e.target.classList.contains("img-wrapper")) {
+    draggedElement = e.target; 
+    e.dataTransfer.setData("text/html", e.target.outerHTML);
+    e.dataTransfer.effectAllowed = "move";
+  }
+});
+
+editorRoot.addEventListener("dragover", (e) => {
+  e.preventDefault(); 
+});
+
+editorRoot.addEventListener("drop", (e) => {
+  e.preventDefault();
+  const html = e.dataTransfer.getData("text/html");
+
+  const range = document.caretPositionFromPoint
+    ? (() => {
+        const pos = document.caretPositionFromPoint(e.clientX, e.clientY);
+        const range = document.createRange();
+        range.setStart(pos.offsetNode, pos.offset);
+        range.collapse(true);
+        return range;
+      })()
+    : document.caretRangeFromPoint(e.clientX, e.clientY);
+
+  if (range) {
+    range.deleteContents();
+    const temp = document.createElement("div");
+    temp.innerHTML = html;
+    range.insertNode(temp.firstChild);
+
+    if (draggedElement) {
+      draggedElement.remove();
+      draggedElement = null;
+    }
+  }
+});
